@@ -56,7 +56,7 @@ export default {
       if (!username) {
         return res.json({
           status: 'error: wrong-username',
-          msg: 'Username does not exist!'
+          msg: 'Username or email not found!'
         })
       }
 
