@@ -1,6 +1,5 @@
-import express from "express";
-
-import parents from '../contollers/parents'
+import express from "express"
+import parents from '../controllers/parents'
 // import { auth } from "../../config/middleware";
 
 const router = express.Router()
