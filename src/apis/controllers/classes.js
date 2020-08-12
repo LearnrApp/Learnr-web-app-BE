@@ -20,6 +20,10 @@ const createClass = async (req, res) => {
 
 const getAllClasses = async (req, res) => {
   const allClasses = await classes.find({})
+  .populate(
+    'courses',
+    '-_id',
+  )
   return successResMsg(res, 200, allClasses)
 }
 

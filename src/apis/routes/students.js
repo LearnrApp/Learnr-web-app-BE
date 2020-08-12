@@ -1,5 +1,5 @@
 import express from "express";
-import students from '../contollers/students'
+import students from '../controllers/students'
 // import { auth } from "../../config/middleware";
 
 const router = express.Router()
