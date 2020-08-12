@@ -1,13 +1,9 @@
-import mongoose, {Schema} from 'mongoose'
+import mongoose, { Schema } from 'mongoose'
 
-const UserSchema = new Schema ({
-  student: {
-    type: Boolean,
-    default: true
-  },
-  parent: {
-    type: Boolean,
-    default: false
+const studentSchema = new Schema ({
+  role: {
+    type: String,
+    enum: ['student']
   },
   fullName: {
     type: String
@@ -34,39 +30,38 @@ const UserSchema = new Schema ({
     type: String
   },
   class: {
-    type: String,
-    enum: ['Js1', 'Js2', 'Js3', 'Ss1', 'Ss2', 'Ss3']
+    type: Schema.Types.ObjectId,
+    ref: 'classes'
   },
   gender: {
     type: String,
     enum: ['Female', 'Male', 'Prefer not to say',]
   },
-  dateCreated: {
-    type: Date,
-    default: new Date()
-  },
   coursesTaken: [
     {
       type: Schema.Types.ObjectId,
-      ref: 'Courses'
+      ref: 'courses'
     },
   ],
   quizTaken: [
     {
       type: Schema.Types.ObjectId,
-      ref: 'Quiz'
+      ref: 'quiz'
     },
   ],
-  profileUpdated: {
-    type: Boolean,
-    default: false
-  },
-  profileUpdatedAt: [
+  achievements: [
     {
-      type: Date,
-      default: new Date()
+      type: Schema.Types.ObjectId,
+      ref: 'achievements'
     },
-  ]
+  ],
+  isActive: {
+    type: Boolean,
+    default: true
+  }
+},
+{
+  timestamps: true
 })
 
-export default mongoose.model('Student', UserSchema)
+export default mongoose.model('students', studentSchema)

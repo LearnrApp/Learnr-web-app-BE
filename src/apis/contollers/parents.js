@@ -2,13 +2,13 @@ import jwt from 'jsonwebtoken'
 import bcrypt from 'bcryptjs'
 import dotenv from 'dotenv'
 
-import Parent from '../../models/parents'
+import parents from '../../models/parents'
 dotenv.config()
 
 export default {
   createParent: async (req, res, next) => {
     try {
-      const findParent = await Parent.findOne({username: req.body.username})
+      const findParent = await parents.findOne({username: req.body.username})
 
       if (findParent) {
         return res.json({
@@ -19,7 +19,7 @@ export default {
   
       const encryptPass = await bcrypt.hash(req.body.password, 12)
       
-      const newParent = new Parent({
+      const newParent = new parents({
         email: req.body.email,
         username: req.body.username,
         password: encryptPass
@@ -51,7 +51,7 @@ export default {
   parentLogin: async (req, res, next) => {
     try {
       // const getEmail = await Parent.findOne({email: req.body.email})
-      const username = await Parent.findOne({username: req.body.username})
+      const username = await parents.findOne({username: req.body.username})
       // const getParent = getEmail || username
       if (!username) {
         return res.json({
