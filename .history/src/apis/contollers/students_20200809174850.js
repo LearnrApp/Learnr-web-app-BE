@@ -22,9 +22,8 @@ export default {
       const newStudent = new students({
         parentEmail: req.body.parentEmail,
         username: req.body.username,
-        password: encryptPass,
         class: req.body.class,
-        role: student
+        password: encryptPass
       })
 
       const savedStudent = await newStudent.save()

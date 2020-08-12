@@ -22,9 +22,7 @@ export default {
       const newStudent = new students({
         parentEmail: req.body.parentEmail,
         username: req.body.username,
-        password: encryptPass,
-        class: req.body.class,
-        role: student
+        password: encryptPass
       })
 
       const savedStudent = await newStudent.save()
@@ -53,7 +51,7 @@ export default {
   studentLogin: async (req, res, next) => {
     try {
       // const getEmail = await Parent.findOne({email: req.body.email})
-      const username = await students.findOne({username: req.body.username})
+      const username = await Student.findOne({username: req.body.username})
       // const getParent = getEmail || username
       if (!username) {
         return res.json({

@@ -1,9 +1,13 @@
 import mongoose, {Schema} from 'mongoose'
 
 const parentSchema = new Schema ({
-  role: {
-    type: String,
-    enum: ['student']
+  student: {
+    type: Boolean,
+    default: false
+  },
+  parent: {
+    type: Boolean,
+    default: true
   },
   fullName: {
     type: String

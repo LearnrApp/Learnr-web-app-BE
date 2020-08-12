@@ -1,9 +1,13 @@
-import mongoose, { Schema } from 'mongoose'
+import mongoose, {Schema} from 'mongoose'
 
 const studentSchema = new Schema ({
-  role: {
-    type: String,
-    enum: ['student']
+  student: {
+    type: Boolean,
+    default: true
+  },
+  parent: {
+    type: Boolean,
+    default: false
   },
   fullName: {
     type: String
@@ -30,13 +34,18 @@ const studentSchema = new Schema ({
     type: String
   },
   class: {
-    type: Schema.Types.ObjectId,
-    ref: 'classes'
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'classes',
+    required: true
   },
   gender: {
     type: String,
     enum: ['Female', 'Male', 'Prefer not to say',]
   },
+  // dateCreated: {
+  //   type: Date,
+  //   default: new Date()
+  // },
   coursesTaken: [
     {
       type: Schema.Types.ObjectId,
@@ -55,10 +64,24 @@ const studentSchema = new Schema ({
       ref: 'achievements'
     },
   ],
-  isActive: {
-    type: Boolean,
-    default: true
-  }
+  profileUpdated: [
+    {
+      type: Boolean,
+      default: false
+    },
+    {
+      timestamps: true
+    }
+  ],
+  // profileUpdatedAt: [
+  //   {
+  //     type: Boolean,
+  //     default: false
+  //   },
+  //   {
+  //     timestamps: true
+  //   }
+  // ]
 },
 {
   timestamps: true

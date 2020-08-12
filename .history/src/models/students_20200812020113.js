@@ -1,9 +1,13 @@
 import mongoose, { Schema } from 'mongoose'
 
 const studentSchema = new Schema ({
-  role: {
-    type: String,
-    enum: ['student']
+  student: {
+    type: Boolean,
+    default: true
+  },
+  parent: {
+    type: Boolean,
+    default: false
   },
   fullName: {
     type: String
@@ -55,10 +59,6 @@ const studentSchema = new Schema ({
       ref: 'achievements'
     },
   ],
-  isActive: {
-    type: Boolean,
-    default: true
-  }
 },
 {
   timestamps: true

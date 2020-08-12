@@ -2,15 +2,15 @@ import jwt from 'jsonwebtoken'
 import bcrypt from 'bcryptjs'
 import dotenv from 'dotenv'
 
-import students from '../../models/students'
+import Parent from '../../models/parents'
 dotenv.config()
 
 export default {
-  createStudent: async (req, res, next) => {
+  createParent: async (req, res, next) => {
     try {
-      const findStudent = await students.findOne({username: req.body.username})
+      const findParent = await Parent.findOne({username: req.body.username})
 
-      if (findStudent) {
+      if (findParent) {
         return res.json({
           status: 'error: user-exists',
           msg: `Username already exists. Try another username`
@@ -19,19 +19,17 @@ export default {
   
       const encryptPass = await bcrypt.hash(req.body.password, 12)
       
-      const newStudent = new students({
-        parentEmail: req.body.parentEmail,
+      const newParent = new Parent({
+        email: req.body.email,
         username: req.body.username,
-        password: encryptPass,
-        class: req.body.class,
-        role: student
+        password: encryptPass
       })
 
-      const savedStudent = await newStudent.save()
+      const savedParent = await newParent.save()
 
       const token = jwt.sign(
         {
-          userJwt: savedStudent._id
+          userJwt: savedParent._id
         },
         process.env.JWT_SECRET
       )
@@ -40,7 +38,7 @@ export default {
         status: 'success',
         msg: 'Account created successfully',
         userToken: token,
-        student: savedStudent
+        user: savedParent
       });
     } catch(err) {
       console.log(err)
@@ -50,10 +48,10 @@ export default {
     }
   },
 
-  studentLogin: async (req, res, next) => {
+  parentLogin: async (req, res, next) => {
     try {
       // const getEmail = await Parent.findOne({email: req.body.email})
-      const username = await students.findOne({username: req.body.username})
+      const username = await Parent.findOne({username: req.body.username})
       // const getParent = getEmail || username
       if (!username) {
         return res.json({
@@ -83,6 +81,5 @@ export default {
       })
     }
   }
-
 
 }

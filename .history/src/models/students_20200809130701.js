@@ -1,9 +1,13 @@
 import mongoose, {Schema} from 'mongoose'
 
-const parentSchema = new Schema ({
-  role: {
-    type: String,
-    enum: ['student']
+const UserSchema = new Schema ({
+  student: {
+    type: Boolean,
+    default: true
+  },
+  parent: {
+    type: Boolean,
+    default: false
   },
   fullName: {
     type: String
@@ -16,18 +20,22 @@ const parentSchema = new Schema ({
   age: {
     type: String
   },
-  email: {
+  parentEmail: {
     type: String,
     unique: true,
-    required: true  
+    default: ''
   },
   password: {
     type: String,
     minlength: 8,
     required: true
   },
-  phone: {
+  photo: {
+    type: String
+  },
+  class: {
     type: String,
+    enum: ['Js1', 'Js2', 'Js3', 'Ss1', 'Ss2', 'Ss3']
   },
   gender: {
     type: String,
@@ -37,16 +45,28 @@ const parentSchema = new Schema ({
     type: Date,
     default: new Date()
   },
+  coursesTaken: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Courses'
+    },
+  ],
+  quizTaken: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Quiz'
+    },
+  ],
+  achievements: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Achievements'
+    },
+  ],
   profileUpdated: {
     type: Boolean,
     default: false
   },
-  students: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: 'Student'
-    }
-  ],
   profileUpdatedAt: [
     {
       type: Date,
@@ -55,4 +75,4 @@ const parentSchema = new Schema ({
   ]
 })
 
-export default mongoose.model('parents', parentSchema)
+export default mongoose.model('Student', UserSchema)

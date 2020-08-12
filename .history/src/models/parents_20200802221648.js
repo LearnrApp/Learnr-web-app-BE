@@ -1,9 +1,13 @@
 import mongoose, {Schema} from 'mongoose'
 
-const parentSchema = new Schema ({
-  role: {
-    type: String,
-    enum: ['student']
+const UserSchema = new Schema ({
+  student: {
+    type: Boolean,
+    default: false
+  },
+  parent: {
+    type: Boolean,
+    default: true
   },
   fullName: {
     type: String
@@ -55,4 +59,4 @@ const parentSchema = new Schema ({
   ]
 })
 
-export default mongoose.model('parents', parentSchema)
+export default mongoose.model('Parent', UserSchema)
