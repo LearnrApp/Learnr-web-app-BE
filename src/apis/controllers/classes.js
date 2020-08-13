@@ -5,7 +5,8 @@ const createClass = async (req, res) => {
   try {
     const { className } = req.body;
     const classCreated = await classes.create({
-      className, 
+      className,
+      // courses: req.params.courseId
     })
     const data = {
       'message': 'Class created successfully',

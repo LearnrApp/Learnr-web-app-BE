@@ -1,14 +1,21 @@
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcryptjs'
 import dotenv from 'dotenv'
-
+import { errorResMsg, successResMsg } from '../../utils/response'
 import students from '../../models/students'
+import classes from '../../models/classes'
 dotenv.config()
 
 export default {
   createStudent: async (req, res, next) => {
     try {
       const findStudent = await students.findOne({username: req.body.username})
+
+      const classData = await classes.findById(req.params.classId)
+
+      if(!classData) {
+        return errorResMsg(res, 404, 'Invalid Class Provided')
+      }
 
       if (findStudent) {
         return res.json({
@@ -20,11 +27,11 @@ export default {
       const encryptPass = await bcrypt.hash(req.body.password, 12)
       
       const newStudent = new students({
-        parentEmail: req.body.parentEmail,
         username: req.body.username,
         password: encryptPass,
-        class: req.body.class,
-        role: student
+        class: req.params.classId,
+        classSelect: req.body.classSelect,
+        role: 'student'
       })
 
       const savedStudent = await newStudent.save()

@@ -4,7 +4,8 @@ import {
   updateCourse,
   createCourse,
   getAllCourseInAClass,
-  deleteCourse } from '../controllers/courses'
+  deleteCourse
+} from '../controllers/courses'
 
 const router = express.Router()
 
