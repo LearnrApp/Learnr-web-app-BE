@@ -4,7 +4,7 @@ import students from '../controllers/students'
 
 const router = express.Router()
 
-router.post("/students/register", students.createStudent)
+router.post("/students/register/:classId", students.createStudent)
 router.post("/students/login", students.studentLogin)
 // router.get("/user/me", auth, users.userProfile);
 

@@ -33,6 +33,11 @@ const studentSchema = new Schema ({
     type: Schema.Types.ObjectId,
     ref: 'classes'
   },
+  classSelect: {
+    type: String,
+    enum: ['Js 1', 'Js 2', 'Js 3', 'Ss 1', 'Ss 2', 'Ss 3'],
+    required: true
+  },
   gender: {
     type: String,
     enum: ['Female', 'Male', 'Prefer not to say',]

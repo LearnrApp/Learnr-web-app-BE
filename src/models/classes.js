@@ -5,6 +5,18 @@ const classSchema = new Schema({
     type: String,
     unique: true
   },
+  courses: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'courses'
+    },
+  ],
+  students: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'students'
+    },
+  ]
 },
 {
   timestamps: true

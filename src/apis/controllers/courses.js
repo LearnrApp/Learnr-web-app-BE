@@ -13,7 +13,8 @@ const createCourse = async (req, res) => {
     }
     const course = await courses.create({
       courseTitle,
-      class: req.params.classId
+      class: req.params.classId,
+      articles: req.params.articleId
     })
     const data = {
       'message': 'Course created successfully',
