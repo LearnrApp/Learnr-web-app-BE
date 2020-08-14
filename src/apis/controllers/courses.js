@@ -63,6 +63,11 @@ const getAllCourseInAClass = async (req, res) => {
   return successResMsg(res, 200, allCoursesInClass)
 }
 
+const getOneCourse = async (req, res) => {
+  const oneCourse = await courses.findById(req.params.courseId)
+  return successResMsg(res, 200, oneCourse)
+}
+
 const deleteCourse = async (req, res) => {
   try {
     await courses.findByIdAndDelete(req.params.courseId)
@@ -80,5 +85,6 @@ module.exports = {
   updateCourse,
   getAllCourses,
   getAllCourseInAClass,
+  getOneCourse,
   deleteCourse,
 }
