@@ -4,6 +4,12 @@ const courseSchema = new Schema ({
   courseTitle: {
     type: String
   },
+  courseImage: {
+    type: String
+  },
+  courseSize: {
+    type: String
+  },
   articles: [
     {
       type: Schema.Types.ObjectId,
