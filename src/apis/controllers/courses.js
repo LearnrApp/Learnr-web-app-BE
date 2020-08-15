@@ -5,6 +5,8 @@ import classes from '../../models/classes';
 const createCourse = async (req, res) => {
   try {
     const { courseTitle } = req.body;
+    const { courseImage } = req.body;
+    const { courseSize } = req.body;
     
     const classData = await classes.findById(req.params.classId)
     
@@ -13,6 +15,8 @@ const createCourse = async (req, res) => {
     }
     const course = await courses.create({
       courseTitle,
+      courseImage,
+      courseSize,
       class: req.params.classId,
       articles: req.params.articleId
     })
