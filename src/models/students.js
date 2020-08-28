@@ -16,6 +16,9 @@ const studentSchema = new Schema ({
   age: {
     type: String
   },
+  phone: {
+    type: String
+  },
   parentEmail: {
     type: String,
     unique: true,

@@ -1,7 +1,9 @@
 node_modules/
 
-.idea/
+/.idea
 
-.history/
+/node_modules
 
 build/
+
+/.history

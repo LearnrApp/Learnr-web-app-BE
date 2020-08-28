@@ -20,6 +20,7 @@ const createCourse = async (req, res) => {
       class: req.params.classId,
       articles: req.params.articleId
     })
+    await classes.findByIdAndUpdate(req.params.classId, {$push: {courses: course._id}}, {new: true})
     const data = {
       'message': 'Course created successfully',
       course

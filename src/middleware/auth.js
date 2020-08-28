@@ -55,3 +55,29 @@
 //         next();
 //     };
 // };
+
+import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+import students from "../models/students";
+
+dotenv.config();
+
+export const auth = async (req, res, next) => {
+    try {
+        const studentToken = req.header("Authorization").split(" ")[1];
+
+        const decoded = jwt.verify(studentToken, process.env.JWT_SECRET);
+
+        const student = await students.findById(decoded.id).select({ password: 0 });
+
+        if (!student) {
+            throw new Error(); // Fires the code inside the catch block....
+        }
+
+        req.students = student;
+
+        next();
+    } catch (err) {
+        res.json({ msg: "Not Authorized" });
+    }
+};
