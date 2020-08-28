@@ -35,10 +35,11 @@ export default {
       })
 
       const savedStudent = await newStudent.save()
+      await classes.findByIdAndUpdate(req.params.classId, {$push: {students: newStudent._id}}, {new: true})
 
       const token = jwt.sign(
         {
-          userJwt: savedStudent._id
+          id: savedStudent._id
         },
         process.env.JWT_SECRET
       )
@@ -79,9 +80,16 @@ export default {
           msg: 'Incorrect login details'
         })
       }
+      const token = jwt.sign(
+        {
+          id: username._id
+        },
+        process.env.JWT_SECRET
+      )
       res.json({
         status: 'success',
-        msg: 'Login successful'
+        msg: 'Login successful',
+        userToken: token
       })
     } catch(err) {
       console.log(err)
@@ -89,7 +97,41 @@ export default {
         msg: err
       })
     }
-  }
+  },
 
+  studentProfile: async (req, res, next) => {
+    try {
+      const student = await students.findById(req.students.id)
+      res.json({
+        status: 'success',
+        student
+      });
+    } catch (e) {
+      console.log(e)
+      res.json({ msg: e });
+    }
+  },
+
+  updateStudentProfile: async (req, res, next) => {
+    try {
+      const studentBody = {
+        ...req.body,
+      }
+      const findStudent = await students.findById(req.students.id)
+
+      if (!findStudent) {
+        return errorResMsg(res, 404, 'User not found')
+      }
+      // const updateStudent = await students.findById()
+      const updateStudent = await students.findByIdAndUpdate(findStudent, studentBody, { new: true })
+      const data = {
+        'message': 'Profile updated successfully',
+        updateStudent
+      }
+      return successResMsg(res, 201, data)
+    } catch (e) {
+      res.json({ msg: e })
+    }
+  }
 
 }

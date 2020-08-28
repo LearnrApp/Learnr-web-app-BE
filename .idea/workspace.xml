@@ -50,9 +50,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f4c3e2fe-ba45-4936-9d34-79bbd33d565b" name="Default Changelist" comment="squash! feat: Added get one course to courses CRUD">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/apis/controllers/courses.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/apis/controllers/courses.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/models/courses.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/courses.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apis/controllers/students.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/apis/controllers/students.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/apis/routes/students.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/apis/routes/students.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/middleware/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/middleware/auth.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/models/students.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/models/students.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,6 +93,7 @@
       <updated>1597394287796</updated>
       <workItem from="1597394297758" duration="4500000" />
       <workItem from="1597490122156" duration="3679000" />
+      <workItem from="1598568869978" duration="14636000" />
     </task>
     <servers />
   </component>

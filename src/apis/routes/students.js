@@ -1,11 +1,13 @@
 import express from "express";
 import students from '../controllers/students'
-// import { auth } from "../../config/middleware";
+import classes from "../../models/classes";
+import { auth } from "../../middleware/auth";
 
 const router = express.Router()
 
-router.post("/students/register/:classId", students.createStudent)
+router.post(`/students/register/:classId`, students.createStudent)
 router.post("/students/login", students.studentLogin)
-// router.get("/user/me", auth, users.userProfile);
+router.get("/students/profile", auth, students.studentProfile)
+router.patch('/students/profile/update', auth, students.updateStudentProfile)
 
 export { router as studentRoutes }
