@@ -62,7 +62,7 @@ import students from "../models/students";
 
 dotenv.config();
 
-export const auth = async (req, res, next) => {
+export const studentAuth = async (req, res, next) => {
     try {
         const studentToken = req.header("Authorization").split(" ")[1];
 

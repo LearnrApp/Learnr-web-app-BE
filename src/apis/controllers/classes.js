@@ -4,14 +4,18 @@ import { errorResMsg, successResMsg } from '../../utils/response'
 const createClass = async (req, res) => {
   try {
     const { className } = req.body;
-    const classCreated = await classes.create({
-      className,
-      // courses: req.params.courseId,
-      // students:
+    // const classCreated = await classes.create({
+    //   className,
+    //   // courses: req.params.courseId,
+    //   // students:
+    // })
+    const newClass = await new classes({
+      className
     })
+    const savedClass = await newClass.save()
     const data = {
       'message': 'Class created successfully',
-      classCreated
+      savedClass
     };
     return successResMsg(res, 201, data)
   } catch (error) {
@@ -23,8 +27,8 @@ const createClass = async (req, res) => {
 const getAllClasses = async (req, res) => {
   const allClasses = await classes.find({})
   .populate(
-    'courses',
-    '-_id',
+    'students',
+    '-_id -password -class',
   )
   return successResMsg(res, 200, allClasses)
 }

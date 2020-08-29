@@ -4,13 +4,14 @@ import dotenv from 'dotenv'
 import { errorResMsg, successResMsg } from '../../utils/response'
 import students from '../../models/students'
 import classes from '../../models/classes'
+
 dotenv.config()
 
 export default {
   createStudent: async (req, res, next) => {
     try {
       const findStudent = await students.findOne({username: req.body.username})
-
+      
       const classData = await classes.findById(req.params.classId)
 
       if(!classData) {
@@ -26,12 +27,23 @@ export default {
   
       const encryptPass = await bcrypt.hash(req.body.password, 12)
       
+      const recBody = {
+        ...req.body
+      }
+      
+      let seniorStudent;
+      if (recBody.classSelect === 'Ss 1' || recBody.classSelect === 'Ss 2' || recBody.classSelect === 'Ss 3') {
+        seniorStudent = true
+      }
+
       const newStudent = new students({
         username: req.body.username,
         password: encryptPass,
+        parentEmail: req.body.parentEmail, 
         class: req.params.classId,
         classSelect: req.body.classSelect,
-        role: 'student'
+        role: 'student',
+        seniorStudent
       })
 
       const savedStudent = await newStudent.save()
@@ -60,9 +72,8 @@ export default {
 
   studentLogin: async (req, res, next) => {
     try {
-      // const getEmail = await Parent.findOne({email: req.body.email})
       const username = await students.findOne({username: req.body.username})
-      // const getParent = getEmail || username
+      
       if (!username) {
         return res.json({
           status: 'error: wrong-username',
@@ -92,7 +103,6 @@ export default {
         userToken: token
       })
     } catch(err) {
-      console.log(err)
       res.json({
         msg: err
       })
@@ -102,17 +112,22 @@ export default {
   studentProfile: async (req, res, next) => {
     try {
       const student = await students.findById(req.students.id)
-      res.json({
-        status: 'success',
+      const data = {
+        message: 'Success',
         student
-      });
+      }
+      return successResMsg(res, 200, data)
+      // res.json({
+      //   status: 'success',
+      //   student
+      // });
     } catch (e) {
       console.log(e)
       res.json({ msg: e });
     }
   },
 
-  updateStudentProfile: async (req, res, next) => {
+  updateStudentProfile: async (req, res) => {
     try {
       const studentBody = {
         ...req.body,
@@ -125,12 +140,24 @@ export default {
       // const updateStudent = await students.findById()
       const updateStudent = await students.findByIdAndUpdate(findStudent, studentBody, { new: true })
       const data = {
-        'message': 'Profile updated successfully',
+        message: 'Profile updated successfully',
         updateStudent
       }
-      return successResMsg(res, 201, data)
+      return successResMsg(res, 200, data)
     } catch (e) {
       res.json({ msg: e })
+    }
+  },
+
+  deleteStudent: async (req, res) => {
+    try {
+      await students.findByIdAndDelete(req.params._id)
+      const data = {
+        'message': 'Student deleted successfully'
+      }
+      return successResMsg(res, 202, data)
+    } catch (error) {
+      res.json({ msg: error })
     }
   }
 

@@ -20,9 +20,7 @@ const studentSchema = new Schema ({
     type: String
   },
   parentEmail: {
-    type: String,
-    unique: true,
-    default: ''
+    type: String
   },
   password: {
     type: String,
@@ -40,6 +38,10 @@ const studentSchema = new Schema ({
     type: String,
     enum: ['Js 1', 'Js 2', 'Js 3', 'Ss 1', 'Ss 2', 'Ss 3'],
     required: true
+  },
+  seniorStudent: {
+    type: Boolean,
+    default: false
   },
   gender: {
     type: String,
