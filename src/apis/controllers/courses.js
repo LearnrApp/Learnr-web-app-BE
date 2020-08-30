@@ -65,6 +65,10 @@ const getAllCourseInAClass = async (req, res) => {
     'class',
     '-_id'
   )
+  .populate(
+    'articles',
+    '-_id -__v'
+  )
   return successResMsg(res, 200, allCoursesInClass)
 }
 

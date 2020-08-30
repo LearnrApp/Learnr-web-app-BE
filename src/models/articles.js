@@ -1,6 +1,10 @@
 import mongoose, { Schema } from 'mongoose'
 
 const articleSchema = new Schema({
+  class: {
+    type: Schema.Types.ObjectId,
+    ref: 'classes'
+  },
   course: {
     type: Schema.Types.ObjectId,
     ref: 'courses'
@@ -9,40 +13,12 @@ const articleSchema = new Schema({
     type: String,
     unique: true
   },
-  // video: {
-  //   type: String,
-  //   unique: true
-  // },
+  video: {
+    type: String,
+    unique: true
+  },
   content: {
-    // type: String
-    introSection: {
-      introSubHead: String,
-      introContent: String
-    },
-    sectionOne: {
-      sectionOneSubHead: String,
-      sectionOneContent: String
-    },
-    sectionTwo: {
-      sectionTwoSubHead: String,
-      sectionTwoContent: String
-    },
-    sectionThree: {
-      sectionThreeSubHead: String,
-      sectionThreeContent: String
-    },
-    sectionFour: {
-      sectionFourSubHead: String,
-      sectionFourContent: String
-    },
-    sectionFive: {
-      sectionFiveSubHead: String,
-      sectionFiveContent: String
-    },
-    sectionSix: {
-      sectionSixSubHead: String,
-      sectionSixContent: String
-    },
+    type: String
   }
 },
 {

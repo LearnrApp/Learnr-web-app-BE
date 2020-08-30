@@ -10,7 +10,7 @@ import {
 
 const router = express.Router()
 
-router.post('/class/:courseId/article', createArticle)
+router.post('/:classId/:courseId/article', createArticle)
 router.get('/articles', getAllArticles,)
 router.get('/class/:courseId/article', getAllArticlesInACourse)
 router.get('/article/:articleId', getAnArticle)
