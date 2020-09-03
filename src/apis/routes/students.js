@@ -9,6 +9,7 @@ router.post(`/students/register/:classId`, students.createStudent)
 router.post("/students/login", students.studentLogin)
 router.get("/students/profile", studentAuth, students.studentProfile)
 router.patch('/students/profile/update/:studentId', students.updateStudentProfile)
+router.patch('/students/profile/update/photo/:studentId', students.updateProfilePhoto)
 router.delete('/students/delete/:_id', students.deleteStudent)
 
 export { router as studentRoutes }
