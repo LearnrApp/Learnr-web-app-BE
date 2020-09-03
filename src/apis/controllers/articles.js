@@ -26,11 +26,12 @@ const createArticle = async (req, res) => {
     })
     await courses.findByIdAndUpdate(req.params.courseId, {$push: {articles: article._id}}, {new: true})
     const data = {
-      'message': 'Course created successfully',
+      'message': 'Article created successfully',
       article
     }
     return successResMsg(res, 201, data) 
   } catch (error) {
+    console.log(error)
     return errorResMsg(res, 500, 'Internal server error, contact your service administrator')
   }
 }

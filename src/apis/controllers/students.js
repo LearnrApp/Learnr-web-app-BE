@@ -149,6 +149,26 @@ export default {
     }
   },
 
+  updateProfilePhoto: async (req, res) => {
+    try {
+      const photoBody = {photo: req.body.photo}
+      const findStudent = await students.findById(req.students.id)
+
+      if(!findStudent) {
+        return errorResMsg(res, 404, 'User not found')
+      }
+
+      const profilePicUpdate = await students.findByIdAndUpdate(findStudent, photoBody, {new: true})
+      const data = {
+        message: 'Profile image updated',
+        profilePicUpdate
+      }
+      return successResMsg(res, 200, data)
+    } catch (error) {
+      throw error
+    }
+  },
+
   deleteStudent: async (req, res) => {
     try {
       await students.findByIdAndDelete(req.params._id)
