@@ -20,7 +20,7 @@ const studentSchema = new Schema ({
     type: String
   },
   parentEmail: {
-    type: String
+    type: String,
   },
   password: {
     type: String,
@@ -28,7 +28,8 @@ const studentSchema = new Schema ({
     required: true
   },
   photo: {
-    type: String
+    type: String,
+    default: 'https://res.cloudinary.com/iykeoyiih/image/upload/v1599157949/Learnr%20Images/Profile%20Images/profile-dp_n7m2xt.svg'
   },
   class: {
     type: Schema.Types.ObjectId,
@@ -47,12 +48,6 @@ const studentSchema = new Schema ({
     type: String,
     enum: ['Female', 'Male', 'Prefer not to say',]
   },
-  coursesTaken: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: 'courses'
-    },
-  ],
   quizTaken: [
     {
       type: Schema.Types.ObjectId,

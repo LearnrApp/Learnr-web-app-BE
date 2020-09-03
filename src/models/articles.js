@@ -14,8 +14,7 @@ const articleSchema = new Schema({
     unique: true
   },
   video: {
-    type: String,
-    unique: true
+    type: String
   },
   content: {
     type: String
