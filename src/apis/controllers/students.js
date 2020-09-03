@@ -132,7 +132,7 @@ export default {
       const studentBody = {
         ...req.body,
       }
-      const findStudent = await students.findById(req.students.id)
+      const findStudent = await students.findById(req.params.studentId)
 
       if (!findStudent) {
         return errorResMsg(res, 404, 'User not found')
@@ -152,7 +152,7 @@ export default {
   updateProfilePhoto: async (req, res) => {
     try {
       const photoBody = {photo: req.body.photo}
-      const findStudent = await students.findById(req.students.id)
+      const findStudent = await students.findById(req.params.studentId)
 
       if(!findStudent) {
         return errorResMsg(res, 404, 'User not found')
