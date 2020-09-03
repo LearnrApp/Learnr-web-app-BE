@@ -29,7 +29,7 @@ const studentSchema = new Schema ({
   },
   photo: {
     type: String,
-    default: 'https://res.cloudinary.com/iykeoyiih/image/upload/v1599157949/Learnr%20Images/Profile%20Images/profile-dp_n7m2xt.svg'
+    default: 'https://res.cloudinary.com/iykeoyiih/image/upload/v1599162145/Learnr%20Images/Profile%20Images/profile-dp_eibwgh.svg'
   },
   class: {
     type: Schema.Types.ObjectId,
