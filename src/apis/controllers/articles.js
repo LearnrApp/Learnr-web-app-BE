@@ -63,8 +63,7 @@ const getAnArticle = async (req, res) => {
 const updateArticle = async (req, res) => {
   try {
     const bodyToBeUpdated = {
-      topic: req.body.topic,
-      content: req.body.content
+      ...req.body
     }
     const articleUpdated = await articles.findByIdAndUpdate(req.params.articleId, bodyToBeUpdated, {
       new: true,
